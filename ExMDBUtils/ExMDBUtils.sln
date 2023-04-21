@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExMDBUtils", "ExMDBUtils\ExMDBUtils.csproj", "{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Debug|x64.ActiveCfg = Debug|x64
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Debug|x64.Build.0 = Debug|x64
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Release|ARM64.ActiveCfg = Release|ARM64
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Release|ARM64.Build.0 = Release|ARM64
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Release|x64.ActiveCfg = Release|x64
+		{3E634AF8-99F0-4CBF-883B-83A8AF2F3698}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2431660B-B0C4-498B-B366-41695E399FD3}
+	EndGlobalSection
+EndGlobal
