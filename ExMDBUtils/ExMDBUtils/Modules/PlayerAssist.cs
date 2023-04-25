@@ -5,8 +5,6 @@ using PlayerRoles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExMDBUtils.Modules
 {
@@ -57,8 +55,8 @@ namespace ExMDBUtils.Modules
                 
                 if (arguments.Count == 0)
                 {
-                    response = "Requires a playername";
-                    return false;
+                    response = String.Join(",", players);
+                    return true;
                 }
 
                 try
