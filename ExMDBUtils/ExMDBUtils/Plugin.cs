@@ -20,25 +20,30 @@ namespace ExMDBUtils
 
         public static Plugin Singleton;
         public ServerHandler ServerHandlers;
+        public PlayerHandler PlayerHandlers;
         public ModuleManager ModuleManagers;
         public override void OnEnabled()
         {
             Singleton = this;
             ServerHandlers = new(this);
+            PlayerHandlers = new(this);
             ModuleManagers = new(this);
 
+            Player.Escaping += PlayerHandlers.OnEscaping;
             Server.RoundStarted += ServerHandlers.OnRoundStarted;
+            
             
             Log.Info("ExUtils Enabled");
             base.OnEnabled();
         }
         public override void OnDisabled()
         {
-
+            
             Server.RoundStarted -= ServerHandlers.OnRoundStarted;
             ServerHandlers = null;
             ModuleManagers = null;
 
+            
             Log.Info("ExUtils Disabled");
             base.OnDisabled();
 
