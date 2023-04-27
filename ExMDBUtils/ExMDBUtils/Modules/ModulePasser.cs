@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExMDBUtils.Modules
 {
+    [Obsolete("Please make sure all classes are subclasses of a BaseModule class", false)]
     public static class ModulePasser
     {
         public static Dictionary<string, object> PrimaryObjectAllocation { get; private set; } = new Dictionary<string, object>();

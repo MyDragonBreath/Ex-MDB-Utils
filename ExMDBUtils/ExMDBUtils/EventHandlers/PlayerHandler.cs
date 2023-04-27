@@ -19,5 +19,8 @@ namespace ExMDBUtils.EventHandlers
 
         public event CustomEventHandler<EscapingEventArgs> _OnEscaping;
         public void OnEscaping(EscapingEventArgs e) => _OnEscaping.Invoke(e);
+
+        public event CustomEventHandler<InteractingElevatorEventArgs> _OnInteractingElevator;
+        public void OnInteractingElevator(InteractingElevatorEventArgs e) => _OnInteractingElevator.Invoke(e);
     }
 }

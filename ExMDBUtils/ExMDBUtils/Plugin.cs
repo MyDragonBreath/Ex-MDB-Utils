@@ -9,6 +9,7 @@ using Exiled.API.Features;
 using ExMDBUtils.EventHandlers;
 using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.Handlers.Player;
+using Map = Exiled.Events.Handlers.Map;
 
 namespace ExMDBUtils
 {
@@ -30,16 +31,20 @@ namespace ExMDBUtils
             ModuleManagers = new(this);
 
             Player.Escaping += PlayerHandlers.OnEscaping;
+            Player.InteractingElevator += PlayerHandlers.OnInteractingElevator;
             Server.RoundStarted += ServerHandlers.OnRoundStarted;
-            
-            
+
             Log.Info("ExUtils Enabled");
             base.OnEnabled();
         }
         public override void OnDisabled()
         {
-            
+
+            Player.Escaping -= PlayerHandlers.OnEscaping;
+            Player.InteractingElevator -= PlayerHandlers.OnInteractingElevator;
             Server.RoundStarted -= ServerHandlers.OnRoundStarted;
+
+
             ServerHandlers = null;
             ModuleManagers = null;
 

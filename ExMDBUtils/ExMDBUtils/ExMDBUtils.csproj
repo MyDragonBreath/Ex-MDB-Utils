@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <LangVersion>9</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,45 +69,46 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp-Publicized">
+    <Reference Include="Assembly-CSharp-Publicized, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\SL_Server\dev\dev\Assembly-CSharp-Publicized.dll</HintPath>
     </Reference>
     <Reference Include="CommandSystem.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\CommandSystem.Core.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\CommandSystem.Core.dll</HintPath>
     </Reference>
     <Reference Include="Exiled.API, Version=6.1.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\Exiled.API.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\Exiled.API.dll</HintPath>
     </Reference>
     <Reference Include="Exiled.CreditTags, Version=6.1.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\Exiled.CreditTags.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\Exiled.CreditTags.dll</HintPath>
     </Reference>
     <Reference Include="Exiled.CustomItems, Version=6.1.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\Exiled.CustomItems.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\Exiled.CustomItems.dll</HintPath>
     </Reference>
     <Reference Include="Exiled.CustomRoles, Version=6.1.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\Exiled.CustomRoles.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\Exiled.CustomRoles.dll</HintPath>
     </Reference>
     <Reference Include="Exiled.Events, Version=6.1.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\Exiled.Events.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\Exiled.Events.dll</HintPath>
     </Reference>
     <Reference Include="Exiled.Loader, Version=6.1.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\Exiled.Loader.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\Exiled.Loader.dll</HintPath>
     </Reference>
     <Reference Include="Exiled.Permissions, Version=6.1.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\Exiled.Permissions.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\Exiled.Permissions.dll</HintPath>
     </Reference>
     <Reference Include="Exiled.Updater, Version=3.1.2.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\Exiled.Updater.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\Exiled.Updater.dll</HintPath>
     </Reference>
     <Reference Include="Mirror, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\SL_Server\dev\dev\Mirror.dll</HintPath>
     </Reference>
     <Reference Include="NorthwoodLib, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\NorthwoodLib.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\NorthwoodLib.dll</HintPath>
     </Reference>
     <Reference Include="PluginAPI, Version=12.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\EXILED.6.1.0-rc.0-4\lib\net48\PluginAPI.dll</HintPath>
+      <HintPath>..\packages\EXILED.6.1.0-beta.3\lib\net48\PluginAPI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -132,12 +134,14 @@
     <Compile Include="Modules\CommandWatcher.cs" />
     <Compile Include="Modules\DetainUse.cs" />
     <Compile Include="Modules\PlayerAssist.cs" />
+    <Compile Include="Modules\RealisticElevators.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\ModulePasser.cs" />
     <Compile Include="Modules\ScpSelect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\BaseSettings.cs" />
+    <Compile Include="Settings\RealisticElevatorConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
