@@ -17,6 +17,6 @@ namespace ExMDBUtils.EventHandlers
 
 
         public event CustomEventHandler _OnRoundStarted; 
-        public void OnRoundStarted() => _OnRoundStarted.Invoke();
+        public void OnRoundStarted() => _OnRoundStarted?.Invoke();
     }
 }
