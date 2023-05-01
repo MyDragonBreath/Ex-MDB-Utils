@@ -91,6 +91,6 @@ Elevator's have realistic speeds based on their distances physically within the 
 
 | Setting | Use | Default |
 | ------- | --- | ------- |
-| `is_enabled` | enable the module | true |
+| `is_enabled` | enable the module | false |
 | `surface_timer_extention` | increase surface lifts delay by x amount | 1 |
 | `light_timer_extention` | increase light lifts delay by x amount | 0.5 |
