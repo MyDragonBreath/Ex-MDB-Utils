@@ -1,6 +1,7 @@
 # Extra eXiled Utils
 
 A collection of utilites for the exiled plugin loader of SCP Secret Lab.
+<br> Currently supported Exiled Version: `6.1.0-beta3`+
 
 Collated into modules for easy use.
 
