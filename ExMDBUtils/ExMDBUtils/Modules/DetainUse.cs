@@ -37,11 +37,7 @@ namespace ExMDBUtils.Modules
                 RespawnTokensManager.GrantTokens(SpawnableTeamType.NineTailedFox, 5f);
                 rt = RoleTypeId.NtfSpecialist;
 
-                var prop = typeof(RoundSummary).GetProperty("EscapedScientists");
-                if (p.Config.Debug) Log.Info($"Original S {(int)prop.GetValue(null, null)}");
-                prop.SetValue(null, (int)prop.GetValue(null, null) + 1);
-                if (p.Config.Debug) Log.Info($"New S {(int)prop.GetValue(null, null)}");
-                //RoundSummary.EscapedScientists++;
+                RoundSummary.EscapedScientists++;
             } 
 
             if (e.EscapeScenario == EscapeScenario.CuffedScientist)
@@ -51,24 +47,20 @@ namespace ExMDBUtils.Modules
                 RespawnTokensManager.GrantTokens(SpawnableTeamType.ChaosInsurgency, 6f);
                 rt = RoleTypeId.ChaosConscript;
 
-                var prop = typeof(RoundSummary).GetProperty("EscapedClassD");
-                if (p.Config.Debug) Log.Info($"Original CD {(int)prop.GetValue(null, null)}");
-                prop.SetValue(null, (int)prop.GetValue(null, null) + 1);
-                if (p.Config.Debug) Log.Info($"New CD {(int)prop.GetValue(null, null)}");
-                //RoundSummary.EscapedClassD++;
+                RoundSummary.EscapedClassD++;
             }
 
 
             
             if (EventManager.ExecuteEvent(ServerEventType.PlayerEscape, ReferenceHub.HostHub, e.EscapeScenario))
             {
-                ReferenceHub.GetHub(e.Player.GameObject).connectionToClient.Send(new EscapeMessage
+                ReferenceHub.GetHub(e.Player.Id).netIdentity.connectionToClient.Send(new EscapeMessage
                 {
                     ScenarioId = (byte)st,
-                    EscapeTime = (ushort)Mathf.CeilToInt(ReferenceHub.GetHub(e.Player.GameObject).roleManager.CurrentRole.ActiveTime)
+                    EscapeTime = (ushort)Mathf.CeilToInt(ReferenceHub.GetHub(e.Player.Id).roleManager.CurrentRole.ActiveTime)
                 });
-                //Escape.OnServerPlayerEscape(ReferenceHub.HostHub); NO ACHIEVEMENTS FOR YOU HAHAHAHAHAHAHAHA
-                ReferenceHub.GetHub(e.Player.GameObject).roleManager.ServerSetRole(rt, RoleChangeReason.Escaped);
+
+                ReferenceHub.GetHub(e.Player.Id).roleManager.ServerSetRole(rt, RoleChangeReason.Escaped);
             }
 
             if (p.Config.Debug) Log.Info($"Escaped {e.EscapeScenario}");
