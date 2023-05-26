@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Exiled.API.Features;
-
+using HarmonyLib;
 
 using ExMDBUtils.EventHandlers;
 using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.Handlers.Player;
 using Map = Exiled.Events.Handlers.Map;
+using ExMDBUtils.API.Voice;
+using ExMDBUtils.Modules.BabelRadio;
+using Exiled.CustomItems.API;
 
 namespace ExMDBUtils
 {
@@ -23,8 +26,14 @@ namespace ExMDBUtils
         public ServerHandler ServerHandlers;
         public PlayerHandler PlayerHandlers;
         public ModuleManager ModuleManagers;
+
+        private BabelRadioItem pv;
         public override void OnEnabled()
         {
+            PlayerVoiceExtentions.ValidationPatches.init();
+
+            pv = new BabelRadioItem(); pv.Register();
+
             Singleton = this;
             ServerHandlers = new(this);
             PlayerHandlers = new(this);
@@ -39,6 +48,7 @@ namespace ExMDBUtils
         }
         public override void OnDisabled()
         {
+            PlayerVoiceExtentions.ValidationPatches.deinit();
 
             Player.Escaping -= PlayerHandlers.OnEscaping;
             Player.InteractingElevator -= PlayerHandlers.OnInteractingElevator;
