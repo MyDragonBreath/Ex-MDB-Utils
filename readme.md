@@ -1,7 +1,7 @@
 # Extra eXiled Utils
 
 A collection of utilites for the exiled plugin loader of SCP Secret Lab.
-<br> Currently supported Exiled Version: `6.1.0-beta3`+
+<br> Currently supported Exiled Version: `7.0.0-rc3`+
 
 Collated into modules for easy use.
 
@@ -14,6 +14,7 @@ Collated into modules for easy use.
 | Detain Use | Provides a win-condition use to detaining roles | [Detain Use](#Player-Assist) |
 | Command Watcher | Watch for pesky mod abuse | [Command Watcher](#Command-Watcher) |
 | Realistic Elevators | Elevators have realistic physical distance length | [Realistic Elevators](#Realistic-Elevators) |
+| Babel Radio | An SCP Item that can be found in the game, that allows players to listen to the scp chat | [Babel Radio](#Babel-Radio) |
 
 ## Modules
 
@@ -94,3 +95,19 @@ Elevator's have realistic speeds based on their distances physically within the 
 | `is_enabled` | enable the module | false |
 | `surface_timer_extention` | increase surface lifts delay by x amount | 1 |
 | `light_timer_extention` | increase light lifts delay by x amount | 0.5 |
+
+
+### Babel Radio
+
+A Custom SCP item that can be found in pedestals around the map.
+This item, when active, allows the players to listen to the SCP's chat - whilst also acting as a normal radio.
+They cannot speak to the SCP's only listen, as was the nature of the babel fish in Hitchhikers.
+
+| Settings | Use | Default |
+| -------- | --- | ------- |
+| `is_enabled` | enable module | true |
+| `is_anonymous` | anonymous scp chat audio | false |
+| `spawnproperties` | radio spawn properties | see config file |
+| `radio_idle_usage` | the idle usage of the radio | 160 (roughly a minute of usage) |
+| `radio_max_range` | the max listening range for normal radio functionality | 99 |
+| `talking_usage` | the usage when talking over the radio | 20 |
