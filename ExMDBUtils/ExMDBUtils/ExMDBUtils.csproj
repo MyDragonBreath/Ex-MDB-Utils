@@ -108,6 +108,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="EventHandlers\PlayerHandler.cs" />
     <Compile Include="EventHandlers\ServerHandler.cs" />
+    <Compile Include="Modules\BabelRadio\BabelRadio.cs" />
     <Compile Include="Modules\BabelRadio\BabelRadioItem.cs" />
     <Compile Include="Modules\CommandWatcher.cs" />
     <Compile Include="Modules\DetainUse.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\ScpSelect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\BabelRadioSettings.cs" />
     <Compile Include="Settings\BaseSettings.cs" />
     <Compile Include="Settings\RealisticElevatorConfig.cs" />
   </ItemGroup>

@@ -23,5 +23,8 @@
 
         [Description("Elevator\'s have realistic speeds based on their distances physically within the world")]
         public RealisticElevatorConfig RealisticElevators { get; set; } = new RealisticElevatorConfig();
+
+        [Description("The babel radio is an SCP item found in pedestals that allow the user to listen into the SCP chat, whilst also functioning as a basic radio")]
+        public BabelRadioSettings BabelRadio { get; set; } = new BabelRadioSettings();
     }
 }

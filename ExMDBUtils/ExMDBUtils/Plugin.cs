@@ -11,7 +11,6 @@ using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.Handlers.Player;
 using Map = Exiled.Events.Handlers.Map;
 using ExMDBUtils.API.Voice;
-using ExMDBUtils.Modules.BabelRadio;
 using Exiled.CustomItems.API;
 
 namespace ExMDBUtils
@@ -27,12 +26,12 @@ namespace ExMDBUtils
         public PlayerHandler PlayerHandlers;
         public ModuleManager ModuleManagers;
 
-        private BabelRadioItem pv;
+        
         public override void OnEnabled()
         {
             PlayerVoiceExtentions.ValidationPatches.init();
 
-            pv = new BabelRadioItem(); pv.Register();
+            
 
             Singleton = this;
             ServerHandlers = new(this);

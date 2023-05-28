@@ -4,6 +4,7 @@ using Exiled.API.Features.Attributes;
 using Exiled.API.Features.Items;
 using Exiled.API.Features.Pickups;
 using Exiled.API.Features.Spawn;
+using Exiled.API.Structs;
 using Exiled.CustomItems.API.EventArgs;
 using Exiled.CustomItems.API.Features;
 using Exiled.Events.EventArgs.Player;
@@ -20,13 +21,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ExMDBUtils.Modules.BabelRadio
+namespace ExMDBUtils.Modules.BabelRadioModule
 {
     [CustomItem(ItemType.Radio)]
     public class BabelRadioItem : CustomItem
     {
         public override uint Id { get; set; } = 60;
-        public override string Name { get; set; } = "Babel Radio";
+        public override string Name { get; set; } = "<color=orange>Babel Radio</color>";
 
         public override string Description { get; set; } = "Listen To <color=red>Scp\'s</color>";
         public override float Weight { get; set; } = 0.75f;
@@ -59,7 +60,6 @@ namespace ExMDBUtils.Modules.BabelRadio
                     continue;
                 spawned++;
 
-                //if (Plugin.Singleton.Config.Debug) Log.Info($"Finding valid lockers");
                 var lockers = Map.Lockers.Where(x => x is not null && x.Loot is not null && x.Chambers is not null && x is PedestalScpLocker).OrderBy(x => new Guid());
                 Vector3 position = lockers.ElementAt(0).Chambers[0]._spawnpoint.transform.position;
 
@@ -89,7 +89,7 @@ namespace ExMDBUtils.Modules.BabelRadio
             return pickup;
         }
 
-        private CustomVoiceChannel voiceChannel = new CustomVoiceChannel(new int[] { },VoiceChat.VoiceChatChannel.ScpChat, new int[] { -1 }, VoiceChat.VoiceChatChannel.Radio, false);
+        public CustomVoiceChannel voiceChannel; 
 
         protected override void OnAcquired(Player player, bool displayMessage)
         {
@@ -103,22 +103,10 @@ namespace ExMDBUtils.Modules.BabelRadio
             base.OnDropping(ev);
         }
 
-        protected override void OnOwnerDying(OwnerDyingEventArgs ev)
-        {
-            StoppedUsing(ev.Player);
-            base.OnOwnerDying(ev);
-        }
-
         protected override void OnOwnerHandcuffing(OwnerHandcuffingEventArgs ev)
         {
             StoppedUsing(ev.Player);
             base.OnOwnerHandcuffing(ev);
-        }
-
-        protected override void OnOwnerChangingRole(OwnerChangingRoleEventArgs ev)
-        {
-            StoppedUsing(ev.Player);
-            base.OnOwnerChangingRole(ev);
         }
 
         protected override void OnOwnerEscaping(OwnerEscapingEventArgs ev)
@@ -131,10 +119,21 @@ namespace ExMDBUtils.Modules.BabelRadio
         {
             Exiled.Events.Handlers.Player.ChangingRadioPreset += Player_ChangingRadioPreset;
             Exiled.Events.Handlers.Player.UsingRadioBattery += Player_UsingRadioBattery;
-            Exiled.Events.Handlers.Player.ChangingItem += Player_ChangingItem;
             Exiled.Events.Handlers.Player.UsedItem += Player_UsedItem;
             Exiled.Events.Handlers.Player.MakingNoise += Player_MakingNoise;
+            Exiled.Events.Handlers.Player.ChangingRole += Player_ChangingRole;
+            Exiled.Events.Handlers.Player.Died += Player_Died;
             base.SubscribeEvents();
+        }
+
+        private void Player_Died(DiedEventArgs ev)
+        {
+            StoppedUsing(ev.Player);
+        }
+
+        private void Player_ChangingRole(ChangingRoleEventArgs ev)
+        {
+            StoppedUsing(ev.Player);
         }
 
         private void Player_MakingNoise(MakingNoiseEventArgs ev)
@@ -145,12 +144,6 @@ namespace ExMDBUtils.Modules.BabelRadio
         private void Player_UsedItem(UsedItemEventArgs ev)
         {
             UsingItem(ev.Item, ev.Player);
-        }
-
-        private void Player_ChangingItem(ChangingItemEventArgs ev)
-        {
-            //((Radio)ev.Player.CurrentItem).IsEnabled
-            UsingItem(ev.NewItem, ev.Player);
         }
 
         private void Player_UsingRadioBattery(UsingRadioBatteryEventArgs ev)
@@ -169,10 +162,12 @@ namespace ExMDBUtils.Modules.BabelRadio
         {
             if (item != null && item is Radio r && Check(item) && r.IsEnabled && r.BatteryLevel > 0)
             {
-                r.SetRangeSettings(Exiled.API.Enums.RadioRange.Long, new() { IdleUsage = 100f, MaxRange = 99, TalkingUsage = 20 });
-                r.SetRangeSettings(Exiled.API.Enums.RadioRange.Ultra, new() { IdleUsage = 100f, MaxRange = 99, TalkingUsage = 20 });
-                r.SetRangeSettings(Exiled.API.Enums.RadioRange.Medium, new() { IdleUsage = 100f, MaxRange = 99, TalkingUsage = 20 });
-                r.SetRangeSettings(Exiled.API.Enums.RadioRange.Short, new() { IdleUsage = 100f, MaxRange = 99, TalkingUsage = 20 });
+
+                RadioRangeSettings BabelRangeSettings = new RadioRangeSettings() { IdleUsage = Plugin.Singleton.Config.BabelRadio.RadioIdleUsage, MaxRange = Plugin.Singleton.Config.BabelRadio.RadioMaxRange, TalkingUsage = Plugin.Singleton.Config.BabelRadio.TalkingUsage };
+                r.SetRangeSettings(Exiled.API.Enums.RadioRange.Long, BabelRangeSettings);
+                r.SetRangeSettings(Exiled.API.Enums.RadioRange.Ultra, BabelRangeSettings);
+                r.SetRangeSettings(Exiled.API.Enums.RadioRange.Medium, BabelRangeSettings);
+                r.SetRangeSettings(Exiled.API.Enums.RadioRange.Short, BabelRangeSettings);
 
                 StartUsing(p);
 
@@ -194,26 +189,5 @@ namespace ExMDBUtils.Modules.BabelRadio
             vc.RemoveAll(x => x == player.Id);
             voiceChannel[1] = vc;
         }
-
-        /*protected override void OnChanging(ChangingItemEventArgs ev)
-        {
-            
-            if (Check(ev.NewItem)) {
-
-                ((Radio)ev.NewItem).SetRangeSettings(Exiled.API.Enums.RadioRange.Long, new() { IdleUsage = 100f, MaxRange = 99, TalkingUsage = 20 });
-                ((Radio)ev.NewItem).SetRangeSettings(Exiled.API.Enums.RadioRange.Ultra, new() { IdleUsage = 100f, MaxRange = 99, TalkingUsage = 20 });
-                ((Radio)ev.NewItem).SetRangeSettings(Exiled.API.Enums.RadioRange.Medium, new() { IdleUsage = 100f, MaxRange = 99, TalkingUsage = 20 });
-                ((Radio)ev.NewItem).SetRangeSettings(Exiled.API.Enums.RadioRange.Short, new() { IdleUsage = 100f, MaxRange = 99, TalkingUsage = 20 });
-
-                var vc = voiceChannel[1];
-                vc.Add(ev.Player.Id);
-                voiceChannel[1] = vc;
-            } else
-            {
-                var vc = voiceChannel[1];
-                vc.RemoveAll(x => x == ev.Player.Id);
-                voiceChannel[1] = vc;
-            }
-        }*/
     }
 }
