@@ -17,7 +17,8 @@ namespace ExMDBUtils.Modules
         {
             pv = new BabelRadioItem();
             pv.SpawnProperties = _plugin.Config.BabelRadio.SpawnProperties;
-            pv.voiceChannel = new CustomVoiceChannel(new int[] { }, VoiceChat.VoiceChatChannel.ScpChat, new int[] { -1 }, VoiceChat.VoiceChatChannel.Radio, Plugin.Singleton.Config.BabelRadio.IsAnonymous);
+            pv.ScpToRadio = new CustomVoiceChannel(new int[] { }, VoiceChat.VoiceChatChannel.ScpChat, new int[] { -1 }, VoiceChat.VoiceChatChannel.Radio, Plugin.Singleton.Config.BabelRadio.IsAnonymous);
+            pv.ScpToRadio = new CustomVoiceChannel(new int[] { -1 }, VoiceChat.VoiceChatChannel.Radio, new int[] { }, VoiceChat.VoiceChatChannel.ScpChat, Plugin.Singleton.Config.BabelRadio.IsAnonymous);
             pv.Register();
         }
     }

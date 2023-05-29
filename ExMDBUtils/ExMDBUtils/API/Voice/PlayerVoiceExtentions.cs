@@ -38,17 +38,11 @@ namespace ExMDBUtils.API.Voice
         {
             public static Harmony harmony;
 
-            //private static CustomVoiceChannel ScpToMimic;
-
             public static List<CustomVoiceChannel> ValidChannels = new List<CustomVoiceChannel>();
 
             public static void init()
             {
                 harmony = new Harmony("dev.dragonbreath.voiceAPI");
-
-                //ScpToMimic = new CustomVoiceChannel(new int[] { }, VoiceChatChannel.ScpChat, new int[] { }, VoiceChatChannel.Intercom);
-                //ValidChannels.Add(ScpToMimic);
-
 
                 MethodInfo original = AccessTools.Method(typeof(VoiceTransceiver), nameof(VoiceTransceiver.ServerReceiveMessage));
                 MethodInfo prefix = AccessTools.Method(typeof(ValidationPatches), nameof(ValidationPatches.prefix_ServerReceiveMessage));
@@ -60,7 +54,7 @@ namespace ExMDBUtils.API.Voice
                 harmony.UnpatchAll();
                 harmony = null;
             }
-
+            
             public static bool prefix_ServerReceiveMessage(NetworkConnection conn, VoiceMessage msg)
             {
 
@@ -74,7 +68,7 @@ namespace ExMDBUtils.API.Voice
                     return true;
                 }
                 
-                foreach (var channel in ValidChannels)
+                foreach (var channel in ValidChannels.OrderBy(x=>x.prevent))
                 {
                     if (channel.SendingVoiceChannel == msg.Channel)
                     {
@@ -100,7 +94,7 @@ namespace ExMDBUtils.API.Voice
                                 }
                             }
 
-                            return true;
+                            return channel.prevent;
                         }
                     }
                 }
@@ -124,23 +118,30 @@ namespace ExMDBUtils.API.Voice
         private List<int> ReceivingPlayers = new List<int>() { -1 } ;
 
         public bool anon = false;
-        public CustomVoiceChannel(VoiceChatChannel SendingVoiceChannel, VoiceChatChannel ReceivingVoiceChannel, bool anonymous = false, VoiceChatChannel OverrideVoiceChannel = VoiceChatChannel.Proximity)
+        public bool prevent = false;
+        public CustomVoiceChannel(VoiceChatChannel SendingVoiceChannel, VoiceChatChannel ReceivingVoiceChannel, bool anonymous = false, bool preventNormalUsage = false, VoiceChatChannel OverrideVoiceChannel = VoiceChatChannel.Proximity)
         {
             this.ReceivingVoiceChannel = ReceivingVoiceChannel;
             this.SendingVoiceChannel = SendingVoiceChannel;
             anon = anonymous;
+            prevent = preventNormalUsage;
+
+            PlayerVoiceExtentions.ValidationPatches.ValidChannels.Add(this);
         }
 
-        public CustomVoiceChannel(int[] sendingPlayers, VoiceChatChannel SendingVoiceChannel, int[] receivingPlayers, VoiceChatChannel ReceivingVoiceChannel, bool anonymous = false, VoiceChatChannel OverrideVoiceChannel = VoiceChatChannel.Proximity)
+        public CustomVoiceChannel(int[] sendingPlayers, VoiceChatChannel SendingVoiceChannel, int[] receivingPlayers, VoiceChatChannel ReceivingVoiceChannel, bool anonymous = false, bool preventNormalUsage = false, VoiceChatChannel OverrideVoiceChannel = VoiceChatChannel.Proximity)
         {
             this.ReceivingVoiceChannel = ReceivingVoiceChannel;
             this.SendingVoiceChannel = SendingVoiceChannel;
             anon = anonymous;
+            prevent = preventNormalUsage;
 
             this.SendingPlayers.Clear();
             this.ReceivingPlayers.Clear();
             this.SendingPlayers.AddRange(sendingPlayers);
             this.ReceivingPlayers.AddRange(receivingPlayers);
+
+            PlayerVoiceExtentions.ValidationPatches.ValidChannels.Add(this);
         }
 
 

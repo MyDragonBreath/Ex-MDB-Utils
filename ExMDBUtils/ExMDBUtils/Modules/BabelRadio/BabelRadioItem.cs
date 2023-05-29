@@ -89,13 +89,8 @@ namespace ExMDBUtils.Modules.BabelRadioModule
             return pickup;
         }
 
-        public CustomVoiceChannel voiceChannel; 
-
-        protected override void OnAcquired(Player player, bool displayMessage)
-        {
-            if (!PlayerVoiceExtentions.ValidationPatches.ValidChannels.Contains(voiceChannel)) PlayerVoiceExtentions.ValidationPatches.ValidChannels.Add(voiceChannel);
-            
-        }
+        public CustomVoiceChannel ScpToRadio;
+        public CustomVoiceChannel RadioToScp;
 
         protected override void OnDropping(DroppingItemEventArgs ev)
         {
@@ -179,15 +174,30 @@ namespace ExMDBUtils.Modules.BabelRadioModule
 
         private void StartUsing(Player p)
         {
-            var vc = voiceChannel[1];
+            var vc = ScpToRadio[1];
             vc.Add(p.Id);
-            voiceChannel[1] = vc;
+            ScpToRadio[1] = vc;
+
+
+            if (Plugin.Singleton.Config.BabelRadio.CanSpeak)
+            {
+                var vc2 = RadioToScp[0];
+                vc2.Add(p.Id);
+                RadioToScp[0] = vc2;
+            }
         }
         private void StoppedUsing(Player player)
         {
-            var vc = voiceChannel[1];
+            var vc = ScpToRadio[1];
             vc.RemoveAll(x => x == player.Id);
-            voiceChannel[1] = vc;
+            ScpToRadio[1] = vc;
+
+            if (Plugin.Singleton.Config.BabelRadio.CanSpeak)
+            {
+                var vc2 = RadioToScp[0];
+                vc2.RemoveAll(x => x == player.Id);
+                RadioToScp[0] = vc2;
+            }
         }
     }
 }
