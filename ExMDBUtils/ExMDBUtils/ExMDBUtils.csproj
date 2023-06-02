@@ -108,6 +108,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="EventHandlers\PlayerHandler.cs" />
     <Compile Include="EventHandlers\ServerHandler.cs" />
+    <Compile Include="Modules\AntiTrap.cs" />
     <Compile Include="Modules\BabelRadio\BabelRadio.cs" />
     <Compile Include="Modules\BabelRadio\BabelRadioItem.cs" />
     <Compile Include="Modules\CommandWatcher.cs" />
