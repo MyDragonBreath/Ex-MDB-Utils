@@ -94,7 +94,7 @@ namespace ExMDBUtils.API.Voice
                                 }
                             }
 
-                            return channel.prevent;
+                            return !channel.prevent;
                         }
                     }
                 }
