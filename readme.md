@@ -1,7 +1,7 @@
 # Extra eXiled Utils
 
 A collection of utilites for the exiled plugin loader of SCP Secret Lab.
-<br> Currently supported Exiled Version: `7.0.0-rc3`+
+<br> Currently supported Exiled Version: `7.0.0-rc5`+
 
 Collated into modules for easy use.
 
@@ -107,7 +107,11 @@ They cannot speak to the SCP's only listen, as was the nature of the babel fish 
 | -------- | --- | ------- |
 | `is_enabled` | enable module | true |
 | `is_anonymous` | anonymous scp chat audio | false |
+| `can_speak` | allows the radio user to communicate with the the SCP's | false |
 | `spawnproperties` | radio spawn properties | see config file |
 | `radio_idle_usage` | the idle usage of the radio | 160 (roughly a minute of usage) |
 | `radio_max_range` | the max listening range for normal radio functionality | 99 |
 | `talking_usage` | the usage when talking over the radio | 20 |
+| `radio_to_vc` | the channel users speaking with `can_speak` speak into, that is heard by the SCP's | RoundSummary |
+
+It is recommended you do not change radio_to_vc unless you know what you are doing.
