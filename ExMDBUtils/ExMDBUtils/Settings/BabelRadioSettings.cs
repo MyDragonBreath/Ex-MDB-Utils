@@ -2,6 +2,7 @@
 using Exiled.API.Structs;
 using System.Collections.Generic;
 using System.ComponentModel;
+using VoiceChat;
 
 namespace ExMDBUtils.Settings
 {
@@ -32,5 +33,7 @@ namespace ExMDBUtils.Settings
         public float RadioIdleUsage { get; set; } = 160f;
         public int RadioMaxRange { get; set; } = 99;
         public int TalkingUsage { get; set; } = 20;
+
+        public VoiceChatChannel radioToVc { get; set; } = VoiceChatChannel.RoundSummary;
     }
 }

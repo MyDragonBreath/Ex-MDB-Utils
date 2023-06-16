@@ -184,6 +184,9 @@ namespace ExMDBUtils.Modules.BabelRadioModule
                 var vc2 = RadioToScp[0];
                 vc2.Add(p.Id);
                 RadioToScp[0] = vc2;
+
+                RadioToScp[1].Clear();
+                RadioToScp[1].AddRange(Player.List.Where(x => x.Role.Team == PlayerRoles.Team.SCPs).Select(x => x.Id));
             }
         }
         private void StoppedUsing(Player player)

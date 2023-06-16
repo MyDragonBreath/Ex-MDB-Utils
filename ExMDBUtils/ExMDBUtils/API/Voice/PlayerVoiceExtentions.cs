@@ -87,8 +87,6 @@ namespace ExMDBUtils.API.Voice
                                     tempref.Channel = vc.VoiceModule.ValidateReceive(msg.Speaker, voiceChatChannel); 
                                     
                                     if (channel.anon) tempref.Speaker = ReferenceHub.HostHub;
-                                    
-                                    if (voiceChatChannel == VoiceChatChannel.ScpChat) { tempref.Channel = VoiceChatChannel.ScpChat; }
                                     if (tempref.Channel == 0) continue;
                                     r.netIdentity.connectionToClient.Send(tempref);
                                 }
