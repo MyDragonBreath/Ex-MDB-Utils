@@ -77,7 +77,7 @@
       <HintPath>$(EXILED_REFERENCES)\Assembly-CSharp-publicized.dll</HintPath>
     </Reference>
     <PackageReference Include="EXILED">
-      <Version>7.0.0-rc.3</Version>
+      <Version>7.0.0-rc.5</Version>
     </PackageReference>
     <Reference Include="Mirror, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
