@@ -101,7 +101,8 @@ Elevator's have realistic speeds based on their distances physically within the 
 
 A Custom SCP item that can be found in pedestals around the map.
 This item, when active, allows the players to listen to the SCP's chat - whilst also acting as a normal radio.
-They cannot speak to the SCP's only listen, as was the nature of the babel fish in Hitchhikers.
+They cannot (normally) speak to the SCP's only listen, as was the nature of the babel fish in Hitchhikers. 
+This can be changed with the `can_speak` setting, but the user will be speaking to both the SCP's and other radio users as a "punishment".
 
 | Settings | Use | Default |
 | -------- | --- | ------- |
