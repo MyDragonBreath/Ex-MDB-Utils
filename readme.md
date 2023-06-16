@@ -80,7 +80,7 @@ And 2: Makes the detained class count towards the opposite win condition.
 ### Command Watcher
 
 Alerts admins of pesky mod abuse. 
-Places a broadcast on screen and sends a full message to the console.
+Places a broadcast on screen and sends a full message to the console to users with the PlayerPermission: ServerConsoleCommands
 
 | Setting | Use | Default |
 | ------- | --- | ------- |
