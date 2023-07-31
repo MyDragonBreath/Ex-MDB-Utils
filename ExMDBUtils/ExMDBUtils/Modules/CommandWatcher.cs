@@ -16,7 +16,7 @@ namespace ExMDBUtils.Modules
         public override void Enable(Plugin _plugin)
         {
 
-            PluginAPI.Events.EventManager.Events[PluginAPI.Enums.ServerEventType.RemoteAdminCommandExecuted].RegisterInvoker(this.GetType(), null, this.GetType().GetMethod("RemoteAdminCommandExecuted"));
+            PluginAPI.Events.EventManager.Events[PluginAPI.Enums.ServerEventType.RemoteAdminCommandExecuted].RegisterInvoker(this.GetType(), null, this.GetType().GetMethod("RemoteAdminCommandExecuted"), true);
         }
 
 

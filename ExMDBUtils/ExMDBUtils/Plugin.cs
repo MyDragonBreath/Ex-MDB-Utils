@@ -20,6 +20,7 @@ namespace ExMDBUtils
         public override string Name => "ExUtils";
         public override string Author => "MyDragonBreath";
         public override Version Version => new Version(1, 1, 0);
+        public override Version RequiredExiledVersion => new Version(7, 2, 0);
 
         public static Plugin Singleton;
         public ServerHandler ServerHandlers;

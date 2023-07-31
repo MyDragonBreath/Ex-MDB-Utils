@@ -52,16 +52,18 @@ namespace ExMDBUtils.Modules
 
 
             
-            if (EventManager.ExecuteEvent(ServerEventType.PlayerEscape, ReferenceHub.HostHub, e.EscapeScenario))
+            if (!EventManager.ExecuteEvent(new PlayerEscapeEvent( ReferenceHub.GetHub(e.Player.Id), rt)))
             {
-                ReferenceHub.GetHub(e.Player.Id).netIdentity.connectionToClient.Send(new EscapeMessage
-                {
-                    ScenarioId = (byte)st,
-                    EscapeTime = (ushort)Mathf.CeilToInt(ReferenceHub.GetHub(e.Player.Id).roleManager.CurrentRole.ActiveTime)
-                });
-
-                ReferenceHub.GetHub(e.Player.Id).roleManager.ServerSetRole(rt, RoleChangeReason.Escaped);
+                return;
             }
+
+            ReferenceHub.GetHub(e.Player.Id).netIdentity.connectionToClient.Send(new EscapeMessage
+            {
+                ScenarioId = (byte)st,
+                EscapeTime = (ushort)Mathf.CeilToInt(ReferenceHub.GetHub(e.Player.Id).roleManager.CurrentRole.ActiveTime)
+            });
+
+            ReferenceHub.GetHub(e.Player.Id).roleManager.ServerSetRole(rt, RoleChangeReason.Escaped);
 
             if (p.Config.Debug) Log.Info($"Escaped {e.EscapeScenario}");
         }
